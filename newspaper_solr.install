@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for newspaper_solr.module
+ */
+
+
+/**
+ * Implements hook_install().
+ */
+function newspaper_solr_install() {
+  // Delete apachesolr default config, so our feature will override it.
+  db_delete('apachesolr_environment')->execute();
+}
