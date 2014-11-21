@@ -4,3 +4,16 @@
  */
 
 include_once 'newspaper_solr.features.inc';
+
+/**
+ * Implements hook_apachesolr_query_prepare().
+ */
+function newspaper_solr_apachesolr_query_prepare(DrupalSolrQueryInterface $query) {
+  // Alter available sorts.
+  $sorts = $query->getAvailableSorts();
+  $sorts = array(
+    'score' => array('title' => t('Relevance')) + $sorts['score'],
+    'ds_created' => $sorts['ds_created'],
+  );
+  $query->setAvailableSorts($sorts);
+}
