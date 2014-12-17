@@ -169,6 +169,7 @@ function newspaper_solr_preprocess_newspaper_solr_issue_grid(&$variables) {
   $result = $query
     ->entityCondition('entity_type', 'taxonomy_term')
     ->entityCondition('bundle', 'issue')
+    ->propertyOrderBy('weight')
     ->addTag('newspaper_issue_grid')
     ->pager(12)
     ->execute();
