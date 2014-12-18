@@ -91,12 +91,7 @@ function newspaper_solr_apachesolr_search_page_alter(&$build, $search_page) {
       $list_items = array();
       foreach ($items as $key => $item) {
         if ($key) {
-          $list_items[] = l($item, $key, array(
-            'attributes' => array(
-              'class' => array('facetapi-inactive'),
-              'rel' => 'nofollow',
-            ),
-          ));
+          $list_items[] = '<a class="facetapi-inactive" rel="nofollow" href="' . $key . '">' . $item . '</a>';
         }
       }
 
