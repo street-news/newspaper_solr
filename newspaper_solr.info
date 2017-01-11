@@ -22,4 +22,6 @@ features[facetapi][] = apachesolr@solr:block:created
 features[facetapi][] = apachesolr@solr:block:im_field_issue
 features[facetapi][] = apachesolr@solr:block:im_field_section
 features[facetapi][] = apachesolr@solr:block:im_field_tags
+features[facetapi][] = apachesolr@solr:block:sm_field_authors
 features[features_api][] = api:2
+mtime = 1484176235
