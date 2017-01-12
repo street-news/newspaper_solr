@@ -44,6 +44,12 @@ function newspaper_solr_facetapi_facet_info_alter(&$facets) {
   if (isset($facets['created'])) {
     $facets['created']['map callback'] = 'newspaper_solr_created_facet_map';
   }
+
+  // Alter custom author label
+  if (isset($facets['customauthor'])) {
+    $facets['customauthor']['label'] = 'Author';
+  }
+
 }
 
 /**
@@ -101,7 +107,7 @@ function newspaper_solr_apachesolr_search_page_alter(&$build, $search_page) {
     $facets['author'] = array(
       '#prefix' => '<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"><h4>' . t('Author') . '</h4>',
       '#suffix' => '</div>',
-      'author' => $elements['author']['is_uid'],
+      'author' => $elements['customauthor']['sm_custom_author_name'],
     );
     $facets['issue'] = array(
       '#prefix' => '<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4"><h4>' . t('Issue') . '</h4>',
@@ -182,4 +188,58 @@ function newspaper_solr_preprocess_newspaper_solr_issue_grid(&$variables) {
       '#theme' => 'pager',
     );
   }
+}
+
+
+/**
+ * Implements hook_apachesolr_index_document_build_ENTITY_TYPE().
+ */
+function newspaper_solr_apachesolr_index_document_build_node(ApacheSolrDocument $document, $entity, $env_id) {
+  if ($entity->type == 'article') {
+
+    switch ($entity->customauthor['mode']) {
+      // If viewing multiple authors, use a more complex theme.
+      case CUSTOMAUTHOR_OTHER_USER:
+          $authors = field_get_items('node', $entity, 'field_authors');
+
+          if ($authors) {
+            foreach($authors as $author) {
+              $user = user_load($author['target_id']);
+              $all_authors[] = ($user->field_user_name) ? $user->field_user_name[LANUGUAGE_NONE][0]['value'] : $user->name;
+            }
+          }
+        break;
+      case CUSTOMAUTHOR_OTHER:
+      case CUSTOMAUTHOR_NONE:
+        $all_authors[] = $entity->customauthor['other'];
+        break;
+      case CUSTOMAUTHOR_NODE_USER:
+        $user = user_load($entity->uid);
+        if ($user->name == 'wpuser_contributor') {
+          $all_authors[] = 'Street Roots';
+        } else {
+          $all_authors[] = ($user->field_user_name) ? $user->field_user_name[LANUGUAGE_NONE][0]['value'] : $user->name;
+        }
+        break;
+    }
+
+    if ($all_authors[0] != '') {
+      $document->setField('sm_custom_author_name', $all_authors);
+      dd($all_authors);
+    }
+
+  }
+}
+
+/**
+ * Implements hook_facetapi_facet_info().
+ */
+function newspaper_solr_facetapi_facet_info($searcher_info) {
+  $facets['customauthor'] = array(
+    'name' => 'customauthor',
+    'label' => t('Custom Author'),
+    'description' => t('Provided by custom author'),
+    'field' => 'sm_custom_author_name',
+  );
+  return $facets;
 }
