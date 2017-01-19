@@ -225,7 +225,6 @@ function newspaper_solr_apachesolr_index_document_build_node(ApacheSolrDocument 
 
     if ($all_authors[0] != '') {
       $document->setField('sm_custom_author_name', $all_authors);
-      dd($all_authors);
     }
 
   }
