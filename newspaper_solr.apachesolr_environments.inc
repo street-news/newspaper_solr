@@ -19,7 +19,8 @@ function newspaper_solr_apachesolr_environments() {
   $environment->conf = array(
     'apachesolr_search_changed_boost' => '0:0',
     'apachesolr_search_comment_boost' => '0:0',
-    'apachesolr_search_date_boost' => '1:100.0',
+    'apachesolr_search_date_boost' => '10:2000.0',
+    'apachesolr_search_facet_pages' => '',
     'apachesolr_search_promote_boost' => '0',
     'apachesolr_search_sticky_boost' => '0',
     'apachesolr_search_type_boosts' => array(
@@ -27,6 +28,8 @@ function newspaper_solr_apachesolr_environments() {
       'page' => '0',
     ),
     'field_bias' => array(
+      'bm_field_disable_facebook_commen' => '0',
+      'bs_field_disable_facebook_commen' => '0',
       'bs_promote' => '0',
       'bs_status' => '0',
       'bs_sticky' => '0',
@@ -55,6 +58,7 @@ function newspaper_solr_apachesolr_environments() {
       'path' => '0',
       'path_alias' => '0',
       'site' => '0',
+      'sm_custom_author_name' => '0',
       'sm_field_authors' => '0',
       'sm_field_byline' => '0',
       'sm_vid_Access_control_sections' => '0',

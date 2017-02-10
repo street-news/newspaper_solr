@@ -24,4 +24,3 @@ features[facetapi][] = apachesolr@solr:block:im_field_issue
 features[facetapi][] = apachesolr@solr:block:im_field_section
 features[facetapi][] = apachesolr@solr:block:im_field_tags
 features[features_api][] = api:2
-mtime = 1484201408
