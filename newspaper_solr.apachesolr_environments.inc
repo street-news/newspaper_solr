@@ -20,7 +20,6 @@ function newspaper_solr_apachesolr_environments() {
     'apachesolr_search_changed_boost' => '0:0',
     'apachesolr_search_comment_boost' => '0:0',
     'apachesolr_search_date_boost' => '10:2000.0',
-    'apachesolr_search_facet_pages' => '',
     'apachesolr_search_promote_boost' => '0',
     'apachesolr_search_sticky_boost' => '0',
     'apachesolr_search_type_boosts' => array(
@@ -86,7 +85,7 @@ function newspaper_solr_apachesolr_environments() {
       'tm_vid_3_names' => '0',
       'tm_vid_4_names' => '0',
       'tos_content_extra' => '0.1',
-      'tos_name' => '3.0',
+      'tos_name' => '0',
       'tos_name_formatted' => '0',
       'ts_comments' => '0.5',
       'url' => '0',
