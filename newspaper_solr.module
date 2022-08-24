@@ -205,7 +205,7 @@ function newspaper_solr_apachesolr_index_document_build_node(ApacheSolrDocument 
           if ($authors) {
             foreach($authors as $author) {
               $user = user_load($author['target_id']);
-              $all_authors[] = ($user->field_user_name) ? $user->field_user_name[LANUGUAGE_NONE][0]['value'] : $user->name;
+              $all_authors[] = ($user->field_user_name) ? $user->field_user_name[LANGUAGE_NONE][0]['value'] : $user->name;
             }
           }
         break;
@@ -218,7 +218,7 @@ function newspaper_solr_apachesolr_index_document_build_node(ApacheSolrDocument 
         if ($user->name == 'wpuser_contributor') {
           $all_authors[] = 'Street Roots';
         } else {
-          $all_authors[] = ($user->field_user_name) ? $user->field_user_name[LANUGUAGE_NONE][0]['value'] : $user->name;
+          $all_authors[] = ($user->field_user_name) ? $user->field_user_name[LANGUAGE_NONE][0]['value'] : $user->name;
         }
         break;
     }
